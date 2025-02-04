@@ -35,7 +35,7 @@
 #include "timeman.h"
 #include "tt.h"
 #include "uci.h"
-#include "syzygy/tbprobe.h"
+// #include "syzygy/tbprobe.h"
 
 namespace Search {
 
@@ -207,7 +207,7 @@ void Search::clear() {
   Time.availableNodes = 0;
   TT.clear();
   Threads.clear();
-  Tablebases::init(Options["SyzygyPath"]); // Free mapped files
+  // Tablebases::init(Options["SyzygyPath"]); // Free mapped files
 }
 
 
@@ -724,13 +724,13 @@ namespace {
             &&  pos.rule50_count() == 0
             && !pos.can_castle(ANY_CASTLING))
         {
-            TB::ProbeState err;
-            TB::WDLScore wdl = Tablebases::probe_wdl(pos, &err);
+            // TB::ProbeState err;
+            // TB::WDLScore wdl = Tablebases::probe_wdl(pos, &err);
 
             // Force check of time on the next occasion
             if (thisThread == Threads.main())
                 static_cast<MainThread*>(thisThread)->callsCnt = 0;
-
+            /*
             if (err != TB::ProbeState::FAIL)
             {
                 thisThread->tbHits.fetch_add(1, std::memory_order_relaxed);
@@ -762,7 +762,7 @@ namespace {
                     else
                         maxValue = value;
                 }
-            }
+            }*/
         }
     }
 
@@ -1910,7 +1910,7 @@ bool RootMove::extract_ponder_from_tt(Position& pos) {
     pos.undo_move(pv[0]);
     return pv.size() > 1;
 }
-
+/*
 void Tablebases::rank_root_moves(Position& pos, Search::RootMoves& rootMoves) {
 
     RootInTB = false;
@@ -1956,4 +1956,4 @@ void Tablebases::rank_root_moves(Position& pos, Search::RootMoves& rootMoves) {
         for (auto& m : rootMoves)
             m.tbRank = 0;
     }
-}
+}*/

@@ -38,11 +38,11 @@ PGOBENCH = ./$(EXE) bench
 ### Source and object files
 SRCS = benchmark.cpp bitbase.cpp bitboard.cpp endgame.cpp evaluate.cpp main.cpp \
 	material.cpp misc.cpp movegen.cpp movepick.cpp pawns.cpp position.cpp psqt.cpp \
-	search.cpp thread.cpp timeman.cpp tt.cpp uci.cpp ucioption.cpp tune.cpp syzygy/tbprobe.cpp
+	search.cpp thread.cpp timeman.cpp tt.cpp uci.cpp ucioption.cpp tune.cpp # syzygy/tbprobe.cpp
 
 OBJS = $(notdir $(SRCS:.cpp=.o))
 
-VPATH = syzygy
+# VPATH = syzygy
 
 ### Establish the operating system name
 KERNEL = $(shell uname -s)
