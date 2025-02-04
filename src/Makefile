@@ -38,7 +38,7 @@ PGOBENCH = ./$(EXE) bench
 ### Source and object files
 SRCS = bitbase.cpp bitboard.cpp endgame.cpp evaluate.cpp main.cpp \
 	material.cpp misc.cpp movegen.cpp movepick.cpp pawns.cpp position.cpp psqt.cpp \
-	search.cpp thread.cpp timeman.cpp tt.cpp uci.cpp ucioption.cpp tune.cpp # syzygy/tbprobe.cpp, benchmark
+	search.cpp thread.cpp timeman.cpp tt.cpp uci.cpp ucioption.cpp # tune.cpp # syzygy/tbprobe.cpp, benchmark bitbase
 
 OBJS = $(notdir $(SRCS:.cpp=.o))
 

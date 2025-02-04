@@ -352,6 +352,7 @@ namespace {
                 // An important Chess960 pattern: a cornered bishop blocked by a friendly
                 // pawn diagonally in front of it is a very serious problem, especially
                 // when that pawn is also blocked.
+                /*
                 if (   pos.is_chess960()
                     && (s == relative_square(Us, SQ_A1) || s == relative_square(Us, SQ_H1)))
                 {
@@ -360,7 +361,7 @@ namespace {
                         score -= !pos.empty(s + d + pawn_push(Us))                ? CorneredBishop * 4
                                 : pos.piece_on(s + d + d) == make_piece(Us, PAWN) ? CorneredBishop * 2
                                                                                   : CorneredBishop;
-                }
+                }*/
             }
         }
 
@@ -913,7 +914,7 @@ Value Eval::evaluate(const Position& pos) {
 /// trace() is like evaluate(), but instead of returning a value, it returns
 /// a string (suitable for outputting to stdout) that contains the detailed
 /// descriptions and values of each evaluation term. Useful for debugging.
-
+/*
 std::string Eval::trace(const Position& pos) {
 
   if (pos.checkers())
@@ -951,4 +952,4 @@ std::string Eval::trace(const Position& pos) {
   ss << "\nFinal evaluation: " << to_cp(v) << " (white side)\n";
 
   return ss.str();
-}
+}*/

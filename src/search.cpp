@@ -215,13 +215,13 @@ void Search::clear() {
 /// command. It searches from the root position and outputs the "bestmove".
 
 void MainThread::search() {
-
+  /*
   if (Limits.perft)
   {
       nodes = perft<true>(rootPos, Limits.perft);
       sync_cout << "\nNodes searched: " << nodes << "\n" << sync_endl;
       return;
-  }
+  }*/
 
   Color us = rootPos.side_to_move();
   Time.init(Limits, us, rootPos.game_ply());
