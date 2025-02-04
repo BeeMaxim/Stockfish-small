@@ -64,7 +64,7 @@ struct Entry {
   Phase gamePhase;
 };
 
-typedef HashTable<Entry, 8192> Table;
+typedef HashTable<Entry, 1024> Table; // 8192
 
 Entry* probe(const Position& pos);
 

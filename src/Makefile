@@ -36,9 +36,9 @@ BINDIR = $(PREFIX)/bin
 PGOBENCH = ./$(EXE) bench
 
 ### Source and object files
-SRCS = benchmark.cpp bitbase.cpp bitboard.cpp endgame.cpp evaluate.cpp main.cpp \
+SRCS = bitbase.cpp bitboard.cpp endgame.cpp evaluate.cpp main.cpp \
 	material.cpp misc.cpp movegen.cpp movepick.cpp pawns.cpp position.cpp psqt.cpp \
-	search.cpp thread.cpp timeman.cpp tt.cpp uci.cpp ucioption.cpp tune.cpp # syzygy/tbprobe.cpp
+	search.cpp thread.cpp timeman.cpp tt.cpp uci.cpp ucioption.cpp tune.cpp # syzygy/tbprobe.cpp, benchmark
 
 OBJS = $(notdir $(SRCS:.cpp=.o))
 
