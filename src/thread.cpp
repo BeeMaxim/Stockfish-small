@@ -67,7 +67,7 @@ int Thread::best_move_count(Move move) const {
 /// Thread::clear() reset histories, usually before a new game
 
 void Thread::clear() {
-
+  /*
   counterMoves.fill(MOVE_NONE);
   mainHistory.fill(0);
   lowPlyHistory.fill(0);
@@ -80,7 +80,7 @@ void Thread::clear() {
                 for (auto& h : to)
                       h->fill(0);
           continuationHistory[inCheck][c][NO_PIECE][0]->fill(Search::CounterMovePruneThreshold - 1);
-      }
+      }*/
 }
 
 
