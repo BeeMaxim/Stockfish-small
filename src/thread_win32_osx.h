@@ -33,7 +33,7 @@
 
 #include <pthread.h>
 
-static const size_t TH_STACK_SIZE = 2 * 1024 * 1024; // 8
+static const size_t TH_STACK_SIZE = 1024 * 1024; // 8
 
 template <class T, class P = std::pair<T*, void(T::*)()>>
 void* start_routine(void* ptr)

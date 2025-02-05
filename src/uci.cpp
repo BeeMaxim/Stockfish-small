@@ -215,11 +215,11 @@ namespace {
 /// In addition to the UCI ones, also some additional debug commands are supported.
 
 void UCI::loop(int argc, char* argv[]) {
-  //Position pos;
+  Position pos;
   string token, cmd;
   StateListPtr states(new std::deque<StateInfo>(1));
 
-  //pos.set(StartFEN, false, &states->back(), Threads.main());
+  pos.set(StartFEN, false, &states->back(), Threads.main());
 
   for (int i = 1; i < argc; ++i)
       cmd += std::string(argv[i]) + " ";
@@ -251,8 +251,8 @@ void UCI::loop(int argc, char* argv[]) {
                     << "\nuciok"  << sync_endl;*/
 
       // else if (token == "setoption")  setoption(is);
-      //if (token == "go")         go(pos, is, states);
-      // else if (token == "position")   position(pos, is, states);
+      if (token == "go")         go(pos, is, states);
+      else if (token == "position")   position(pos, is, states);
       // else if (token == "ucinewgame") Search::clear();
       if (token == "isready")    sync_cout << "readyok" << sync_endl; // else if
 
