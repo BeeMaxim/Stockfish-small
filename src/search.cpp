@@ -1729,7 +1729,7 @@ moves_loop: // When in check, search starts from here
   // update_quiet_stats() updates move sorting heuristics
 
   void update_quiet_stats(const Position& pos, Stack* ss, Move move, int bonus, int depth) {
-
+    /*
     if (ss->killers[0] != move)
     {
         ss->killers[1] = ss->killers[0];
@@ -1751,7 +1751,7 @@ moves_loop: // When in check, search starts from here
     }
 
     if (depth > 11 && ss->ply < MAX_LPH)
-        thisThread->lowPlyHistory[ss->ply][from_to(move)] << stat_bonus(depth - 6);
+        thisThread->lowPlyHistory[ss->ply][from_to(move)] << stat_bonus(depth - 6);*/
   }
 
   // When playing with strength handicap, choose best move among a set of RootMoves
