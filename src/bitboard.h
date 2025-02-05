@@ -102,8 +102,8 @@ struct Magic {
   }
 };
 
-extern Magic RookMagics[SQUARE_NB];
-extern Magic BishopMagics[SQUARE_NB];
+// extern Magic RookMagics[SQUARE_NB];
+// extern Magic BishopMagics[SQUARE_NB];
 
 inline Bitboard square_bb(Square s) {
   assert(is_ok(s));
@@ -303,6 +303,42 @@ inline Bitboard attacks_bb(Square s) {
 }
 
 
+inline Bitboard bishop_attacks_bb(Square s, Bitboard occupied) {
+  Bitboard attacks = 0;
+  const Direction directions[] = { NORTH_EAST, SOUTH_EAST, SOUTH_WEST, NORTH_WEST };
+
+  for (int i = 0; i < 4; ++i) {
+    Direction d = directions[i];
+    Square to = s + d;
+            
+    while (is_ok(to) && distance(to - d, to) == 1) {
+      attacks |= to;
+      if (occupied & to) break;
+      to += d;
+    }
+  }
+  return attacks;
+}
+
+
+inline Bitboard rook_attacks_bb(Square s, Bitboard occupied) {
+  Bitboard attacks = 0;
+  const Direction directions[] = { NORTH, EAST, SOUTH, WEST };
+
+  for (int i = 0; i < 4; ++i) {
+    Direction d = directions[i];
+    Square to = s + d;
+            
+    while (is_ok(to) && distance(to - d, to) == 1) {
+      attacks |= to;
+      if (occupied & to) break;
+      to += d;
+    }
+  }
+  return attacks;
+}
+
+
 /// attacks_bb(Square, Bitboard) returns the attacks by the given piece
 /// assuming the board is occupied according to the passed Bitboard.
 /// Sliding piece attacks do not continue passed an occupied square.
@@ -311,12 +347,19 @@ template<PieceType Pt>
 inline Bitboard attacks_bb(Square s, Bitboard occupied) {
 
   assert((Pt != PAWN) && (is_ok(s)));
-
+  /*
   switch (Pt)
   {
   case BISHOP: return BishopMagics[s].attacks[BishopMagics[s].index(occupied)];
   case ROOK  : return   RookMagics[s].attacks[  RookMagics[s].index(occupied)];
   case QUEEN : return attacks_bb<BISHOP>(s, occupied) | attacks_bb<ROOK>(s, occupied);
+  default    : return PseudoAttacks[Pt][s];
+  }*/
+  switch (Pt)
+  {
+  case BISHOP: return bishop_attacks_bb(s, occupied);
+  case ROOK  : return rook_attacks_bb(s, occupied);
+  case QUEEN : return bishop_attacks_bb(s, occupied) | rook_attacks_bb(s, occupied);
   default    : return PseudoAttacks[Pt][s];
   }
 }

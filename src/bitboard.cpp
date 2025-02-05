@@ -32,13 +32,13 @@ Bitboard LineBB[SQUARE_NB][SQUARE_NB];
 Bitboard PseudoAttacks[PIECE_TYPE_NB][SQUARE_NB];
 Bitboard PawnAttacks[COLOR_NB][SQUARE_NB];
 
-Magic RookMagics[SQUARE_NB];
-Magic BishopMagics[SQUARE_NB];
+// Magic RookMagics[SQUARE_NB];
+// Magic BishopMagics[SQUARE_NB];
 
 namespace {
 
-  Bitboard RookTable[0x19000];  // To store rook attacks
-  Bitboard BishopTable[0x1480]; // To store bishop attacks
+  // Bitboard RookTable[0x19000];  // To store rook attacks
+  // Bitboard BishopTable[0x1480]; // To store bishop attacks
 
   void init_magics(PieceType pt, Bitboard table[], Magic magics[]);
 }
@@ -81,8 +81,8 @@ void Bitboards::init() {
 
   // Bitboard RookTable[0x19000];  // To store rook attacks
   // Bitboard BishopTable[0x1480]; // To store bishop attacks
-  init_magics(ROOK, RookTable, RookMagics);
-  init_magics(BISHOP, BishopTable, BishopMagics);
+  // init_magics(ROOK, RookTable, RookMagics);
+  // init_magics(BISHOP, BishopTable, BishopMagics);
 
   for (Square s1 = SQ_A1; s1 <= SQ_H8; ++s1)
   {
