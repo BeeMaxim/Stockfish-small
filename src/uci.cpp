@@ -215,15 +215,14 @@ namespace {
 /// In addition to the UCI ones, also some additional debug commands are supported.
 
 void UCI::loop(int argc, char* argv[]) {
-
   Position pos;
-  string token, cmd;
+  string token, cmd;/*
   StateListPtr states(new std::deque<StateInfo>(1));
 
   pos.set(StartFEN, false, &states->back(), Threads.main());
 
   for (int i = 1; i < argc; ++i)
-      cmd += std::string(argv[i]) + " ";
+      cmd += std::string(argv[i]) + " ";*/
 
   do {
       if (argc == 1 && !getline(cin, cmd)) // Block here waiting for input or EOF
@@ -233,10 +232,10 @@ void UCI::loop(int argc, char* argv[]) {
 
       token.clear(); // Avoid a stale if getline() returns empty or blank line
       is >> skipws >> token;
-
+      /*
       if (    token == "quit"
           ||  token == "stop")
-          Threads.stop = true;
+          Threads.stop = true;*/
 
       // The GUI sends 'ponderhit' to tell us the user has played the expected move.
       // So 'ponderhit' will be sent if we were told to ponder on the same move the
@@ -252,10 +251,10 @@ void UCI::loop(int argc, char* argv[]) {
                     << "\nuciok"  << sync_endl;*/
 
       // else if (token == "setoption")  setoption(is);
-      else if (token == "go")         go(pos, is, states);
-      else if (token == "position")   position(pos, is, states);
+      // else if (token == "go")         go(pos, is, states);
+      // else if (token == "position")   position(pos, is, states);
       // else if (token == "ucinewgame") Search::clear();
-      else if (token == "isready")    sync_cout << "readyok" << sync_endl;
+      if (token == "isready")    sync_cout << "readyok" << sync_endl; // else if
 
       // Additional custom non-UCI commands, mainly for debugging.
       // Do not use these commands during a search!
