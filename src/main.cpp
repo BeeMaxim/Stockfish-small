@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 
   // UCI::init(Options);
   // Tune::init();
-  PSQT::init();
+  // PSQT::init();
   // Bitboards::init();
   // Position::init();
   // Bitbases::init();
