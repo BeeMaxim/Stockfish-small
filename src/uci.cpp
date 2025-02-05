@@ -216,13 +216,13 @@ namespace {
 
 void UCI::loop(int argc, char* argv[]) {
   Position pos;
-  string token, cmd;/*
+  string token, cmd;
   StateListPtr states(new std::deque<StateInfo>(1));
 
   pos.set(StartFEN, false, &states->back(), Threads.main());
 
   for (int i = 1; i < argc; ++i)
-      cmd += std::string(argv[i]) + " ";*/
+      cmd += std::string(argv[i]) + " ";
 
   do {
       if (argc == 1 && !getline(cin, cmd)) // Block here waiting for input or EOF
@@ -251,10 +251,10 @@ void UCI::loop(int argc, char* argv[]) {
                     << "\nuciok"  << sync_endl;*/
 
       // else if (token == "setoption")  setoption(is);
-      // else if (token == "go")         go(pos, is, states);
-      // else if (token == "position")   position(pos, is, states);
+      if (token == "go")         go(pos, is, states);
+      else if (token == "position")   position(pos, is, states);
       // else if (token == "ucinewgame") Search::clear();
-      if (token == "isready")    sync_cout << "readyok" << sync_endl; // else if
+      else if (token == "isready")    sync_cout << "readyok" << sync_endl; // else if
 
       // Additional custom non-UCI commands, mainly for debugging.
       // Do not use these commands during a search!

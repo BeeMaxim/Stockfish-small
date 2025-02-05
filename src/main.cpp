@@ -39,13 +39,13 @@ int main(int argc, char* argv[]) {
 
   UCI::init(Options);
   // Tune::init();
-  // PSQT::init();
+  PSQT::init();
   Bitboards::init();
-  // Position::init();
+  Position::init();
   // Bitbases::init();
   // Endgames::init();
   Threads.set(size_t(Options["Threads"]));
-  // Search::clear(); // After threads are up
+  Search::clear(); // After threads are up
 
   UCI::loop(argc, argv);
 
