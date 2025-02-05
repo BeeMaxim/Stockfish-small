@@ -147,17 +147,17 @@ void ThreadPool::set(size_t requested) {
   }
 
   if (requested > 0) { // create new thread(s)
-      /*push_back(new MainThread(0));
-
+      push_back(new MainThread(0));
+      /*
       while (size() < requested)
           push_back(new Thread(size()));*/
-      clear();
+      // clear();
 
       // Reallocate the hash with the new threadpool size
-      TT.resize(size_t(Options["Hash"]));
+      // TT.resize(size_t(Options["Hash"]));
 
       // Init thread number dependent search params.
-      Search::init();
+      // Search::init();
   }
 }
 
