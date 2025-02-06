@@ -102,8 +102,8 @@ struct Magic {
   }
 };
 
-// extern Magic RookMagics[SQUARE_NB];
-// extern Magic BishopMagics[SQUARE_NB];
+extern Magic RookMagics[SQUARE_NB];
+extern Magic BishopMagics[SQUARE_NB];
 
 inline Bitboard square_bb(Square s) {
   assert(is_ok(s));
@@ -347,21 +347,22 @@ template<PieceType Pt>
 inline Bitboard attacks_bb(Square s, Bitboard occupied) {
 
   assert((Pt != PAWN) && (is_ok(s)));
-  /*
+  
   switch (Pt)
   {
   case BISHOP: return BishopMagics[s].attacks[BishopMagics[s].index(occupied)];
   case ROOK  : return   RookMagics[s].attacks[  RookMagics[s].index(occupied)];
   case QUEEN : return attacks_bb<BISHOP>(s, occupied) | attacks_bb<ROOK>(s, occupied);
   default    : return PseudoAttacks[Pt][s];
-  }*/
+  }
+  /*
   switch (Pt)
   {
   case BISHOP: return bishop_attacks_bb(s, occupied);
   case ROOK  : return rook_attacks_bb(s, occupied);
   case QUEEN : return bishop_attacks_bb(s, occupied) | rook_attacks_bb(s, occupied);
   default    : return PseudoAttacks[Pt][s];
-  }
+  }*/
 }
 
 inline Bitboard attacks_bb(PieceType pt, Square s, Bitboard occupied) {

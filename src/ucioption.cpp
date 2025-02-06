@@ -65,7 +65,7 @@ void init(OptionsMap& o) {
   o["Threads"]               << Option(1, 1, 512, on_threads);
   o["Hash"]                  << Option(1, 1, MaxHashMB, on_hash_size); // 16, 1
   o["Clear Hash"]            << Option(on_clear_hash);
-  o["Ponder"]                << Option(false);
+  o["Ponder"]                << Option(true);
   o["MultiPV"]               << Option(1, 1, 500);
   o["Skill Level"]           << Option(20, 0, 20);
   o["Move Overhead"]         << Option(10, 0, 5000);
