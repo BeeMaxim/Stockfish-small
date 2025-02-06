@@ -290,7 +290,7 @@ endif
 ### 3.3 Optimization
 ifeq ($(optimize),yes)
 
-	CXXFLAGS += -O3
+	CXXFLAGS += -Os
 
 	ifeq ($(comp),gcc)
 		ifeq ($(OS), Android)
