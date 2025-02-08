@@ -254,7 +254,7 @@ void UCI::loop(int argc, char* argv[]) {
       else if (token == "go")         go(pos, is, states);
       else if (token == "position")   position(pos, is, states);
       // else if (token == "ucinewgame") Search::clear();
-      if (token == "isready")    sync_cout << "readyok" << sync_endl; // else if
+      else if (token == "isready")    sync_cout << "readyok" << sync_endl; // else if
 
       // Additional custom non-UCI commands, mainly for debugging.
       // Do not use these commands during a search!
