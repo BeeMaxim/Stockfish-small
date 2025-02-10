@@ -154,8 +154,8 @@ endif
 ### ==========================================================================
 
 ### 3.1 Selecting compiler (default = gcc)
-CXXFLAGS += -Wall -Wcast-qual -fno-exceptions -std=c++11 $(EXTRACXXFLAGS)
-DEPENDFLAGS += -std=c++11
+CXXFLAGS += -Wall -Wcast-qual -fno-exceptions -std=c++17 $(EXTRACXXFLAGS)
+DEPENDFLAGS += -std=c++17
 LDFLAGS += $(EXTRALDFLAGS)
 
 ifeq ($(COMP),)
@@ -290,7 +290,7 @@ endif
 ### 3.3 Optimization
 ifeq ($(optimize),yes)
 
-	CXXFLAGS += -Os
+	CXXFLAGS += -O3
 
 	ifeq ($(comp),gcc)
 		ifeq ($(OS), Android)

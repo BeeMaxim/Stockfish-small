@@ -19,7 +19,7 @@
 */
 
 #include <algorithm>
-#include <cassert>
+// #include <cassert>
 
 #include "bitboard.h"
 #include "pawns.h"
@@ -103,7 +103,7 @@ namespace {
     // Loop through all pawns of the current color and score each pawn
     while ((s = *pl++) != SQ_NONE)
     {
-        assert(pos.piece_on(s) == make_piece(Us, PAWN));
+        // assert(pos.piece_on(s) == make_piece(Us, PAWN));
 
         Rank r = relative_rank(Us, s);
 

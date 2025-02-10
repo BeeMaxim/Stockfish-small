@@ -18,7 +18,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <cassert>
+// #include <cassert>
 
 #include <algorithm> // For std::count
 #include "movegen.h"
@@ -45,7 +45,7 @@ Thread::Thread(size_t n) : idx(n), stdThread(&Thread::idle_loop, this) {
 
 Thread::~Thread() {
 
-  assert(!searching);
+  // assert(!searching);
 
   exit = true;
   start_searching();
@@ -113,8 +113,9 @@ void Thread::idle_loop() {
   // some Windows NUMA hardware, for instance in fishtest. To make it simple,
   // just check if running threads are below a threshold, in this case all this
   // NUMA machinery is not needed.
+  /*
   if (Options["Threads"] > 8)
-      WinProcGroup::bindThisThread(idx);
+      WinProcGroup::bindThisThread(idx);*/
 
   while (true)
   {
@@ -137,13 +138,13 @@ void Thread::idle_loop() {
 /// Upon resizing, threads are recreated to allow for binding if necessary.
 
 void ThreadPool::set(size_t requested) {
-
+/*
   if (size() > 0) { // destroy any existing thread(s)
       main()->wait_for_search_finished();
 
       while (size() > 0)
           delete back(), pop_back();
-  }
+  }*/
 
   if (requested > 0) { // create new thread(s)
       push_back(new MainThread(0));
@@ -198,7 +199,7 @@ void ThreadPool::start_thinking(Position& pos, StateListPtr& states,
 
   // After ownership transfer 'states' becomes empty, so if we stop the search
   // and call 'go' again without setting a new position states.get() == NULL.
-  assert(states.get() || setupStates.get());
+  // assert(states.get() || setupStates.get());
 
   if (states.get())
       setupStates = std::move(states); // Ownership transfer, states is now empty
@@ -224,7 +225,7 @@ void ThreadPool::start_thinking(Position& pos, StateListPtr& states,
 }
 
 Thread* ThreadPool::get_best_thread() const {
-
+/*
     Thread* bestThread = front();
     std::map<Move, int64_t> votes;
     Value minScore = VALUE_NONE;
@@ -251,7 +252,8 @@ Thread* ThreadPool::get_best_thread() const {
               bestThread = th;
     }
 
-    return bestThread;
+    return bestThread;*/
+    return *this->begin();
 }
 
 

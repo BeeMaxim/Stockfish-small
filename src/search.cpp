@@ -1833,7 +1833,7 @@ void MainThread::check_time() {
 /// that all (if any) unsearched PV lines are sent using a previous search score.
 
 string UCI::pv(const Position& pos, Depth depth, Value alpha, Value beta) {
-/*
+
   std::stringstream ss;
   TimePoint elapsed = Time.elapsed() + 1;
   const RootMoves& rootMoves = pos.this_thread()->rootMoves;
@@ -1884,7 +1884,7 @@ string UCI::pv(const Position& pos, Depth depth, Value alpha, Value beta) {
           ss << " " << UCI::move(m, pos.is_chess960());
   }
 
-  return ss.str();*/ return "";
+  return ss.str(); return "";
 }
 
 
