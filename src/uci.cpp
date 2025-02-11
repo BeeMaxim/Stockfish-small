@@ -245,16 +245,16 @@ void UCI::loop(int argc, char* argv[]) {
       else if (token == "ponderhit")
           Threads.main()->ponder = false; // Switch to normal search
 
-      else if (token == "uci")
+     /* else if (token == "uci")
           sync_cout << "id name " << engine_info(true)
                     << "\n"       << Options
-                    << "\nuciok"  << sync_endl;
+                    << "\nuciok"  << sync_endl;*/
 
-      else if (token == "setoption")  setoption(is);
+     // else if (token == "setoption")  setoption(is);
       else if (token == "go")         go(pos, is, states);
       else if (token == "position")   position(pos, is, states);
       // else if (token == "ucinewgame") Search::clear();
-      else if (token == "isready")    sync_cout << "readyok" << sync_endl; // else if
+      // else if (token == "isready")    sync_cout << "readyok" << sync_endl; // else if
 
       // Additional custom non-UCI commands, mainly for debugging.
       // Do not use these commands during a search!

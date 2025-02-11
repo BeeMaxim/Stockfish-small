@@ -162,6 +162,7 @@ namespace {
 
   // perft() is our utility to verify move generation. All the leaf nodes up
   // to the given depth are generated and counted, and the sum is returned.
+  /*
   template<bool Root>
   uint64_t perft(Position& pos, Depth depth) {
 
@@ -184,7 +185,7 @@ namespace {
             sync_cout << UCI::move(m, pos.is_chess960()) << ": " << cnt << sync_endl;
     }
     return nodes;
-  }
+  }*/
 
 } // namespace
 
@@ -258,23 +259,25 @@ void MainThread::search() {
 
   // When playing in 'nodes as time' mode, subtract the searched nodes from
   // the available ones before exiting.
+  /*
   if (Limits.npmsec)
-      Time.availableNodes += Limits.inc[us] - Threads.nodes_searched();
+      Time.availableNodes += Limits.inc[us] - Threads.nodes_searched();*/
 
   Thread* bestThread = this;
-
+/*
   if (   int(Options["MultiPV"]) == 1
       && !Limits.depth
       && !(Skill(Options["Skill Level"]).enabled() || int(Options["UCI_LimitStrength"]))
       && rootMoves[0].pv[0] != MOVE_NONE)
-      bestThread = Threads.get_best_thread();
+      bestThread = Threads.get_best_thread();*/
 
   bestPreviousScore = bestThread->rootMoves[0].score;
 
-  // Send again PV info if we have a new best thread
+  // nd again PV info if we have a new best thread
+/*
   if (bestThread != this)
       sync_cout << UCI::pv(bestThread->rootPos, bestThread->completedDepth, -VALUE_INFINITE, VALUE_INFINITE) << sync_endl;
-
+*/
   sync_cout << "bestmove " << UCI::move(bestThread->rootMoves[0].pv[0], rootPos.is_chess960());
 
   if (bestThread->rootMoves[0].pv.size() > 1 || bestThread->rootMoves[0].extract_ponder_from_tt(rootPos))
@@ -334,6 +337,7 @@ void Thread::search() {
   // to CCRL Elo (goldfish 1.13 = 2000) and a fit through Ordo derived Elo
   // for match (TC 60+0.6) results spanning a wide range of k values.
   PRNG rng(now());
+  
   double floatLevel = Options["UCI_LimitStrength"] ?
                       Utility::clamp(std::pow((Options["UCI_Elo"] - 1346.6) / 143.4, 1 / 0.806), 0.0, 20.0) :
                         double(Options["Skill Level"]);
@@ -343,8 +347,9 @@ void Thread::search() {
 
   // When playing with strength handicap enable MultiPV search that we will
   // use behind the scenes to retrieve a set of possible moves.
+  /*
   if (skill.enabled())
-      multiPV = std::max(multiPV, (size_t)4);
+      multiPV = std::max(multiPV, (size_t)4);*/
 
   multiPV = std::min(multiPV, rootMoves.size());
   ttHitAverage = TtHitAverageWindow * TtHitAverageResolution / 2;
@@ -493,13 +498,14 @@ void Thread::search() {
           && bestValue >= VALUE_MATE_IN_MAX_PLY
           && VALUE_MATE - bestValue <= 2 * Limits.mate)
           Threads.stop = true;
-
+/*
       if (!mainThread)
-          continue;
+          continue;*/
 
       // If skill level is enabled and time is up, pick a sub-optimal best move
+      /*
       if (skill.enabled() && skill.time_to_pick(rootDepth))
-          skill.pick_best(multiPV);
+          skill.pick_best(multiPV);*/
 
       // Do we have time for the next iteration? Can we stop searching now?
       if (    Limits.use_time_management()
@@ -553,10 +559,12 @@ void Thread::search() {
   mainThread->previousTimeReduction = timeReduction;
 
   // If skill level is enabled, swap best PV line with the sub-optimal one
+  /*
   if (skill.enabled())
       std::swap(rootMoves[0], *std::find(rootMoves.begin(), rootMoves.end(),
-                skill.best ? skill.best : skill.pick_best(multiPV)));
+                skill.best ? skill.best : skill.pick_best(multiPV)));*/
 }
+
 
 
 namespace {
@@ -1222,7 +1230,7 @@ moves_loop: // When in check, search starts from here
                              /*+ (*contHist[0])[movedPiece][to_sq(move)]
                              + (*contHist[1])[movedPiece][to_sq(move)]
                              + (*contHist[3])[movedPiece][to_sq(move)]*/
-                              - 1206;
+                              - 4326;
                              // - 4826;
 
               // Decrease/increase reduction by comparing opponent's stat score (~10 Elo)

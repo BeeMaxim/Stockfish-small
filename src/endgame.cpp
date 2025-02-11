@@ -68,7 +68,7 @@ namespace {
 namespace Endgames {
 
   std::pair<Map<Value>, Map<ScaleFactor>> maps;
-
+/*
   void init() {
 
     add<KPK>("KPK");
@@ -87,7 +87,7 @@ namespace Endgames {
     add<KBPKN>("KBPKN");
     add<KBPPKB>("KBPPKB");
     add<KRPPKRP>("KRPPKRP");
-  }
+  }*/
 }
 
 
@@ -151,7 +151,7 @@ Value Endgame<KBNK>::operator()(const Position& pos) const {
 /// KP vs K. This endgame is evaluated with the help of a bitbase
 template<>
 Value Endgame<KPK>::operator()(const Position& pos) const {
-
+  return VALUE_DRAW;
   assert(verify_material(pos, strongSide, VALUE_ZERO, 1));
   assert(verify_material(pos, weakSide, VALUE_ZERO, 0));
 
@@ -161,9 +161,9 @@ Value Endgame<KPK>::operator()(const Position& pos) const {
   Square weakKing   = normalize(pos, strongSide, pos.square<KING>(weakSide));
 
   Color us = strongSide == pos.side_to_move() ? WHITE : BLACK;
-
+/*
   if (!Bitbases::probe(strongKing, strongPawn, weakKing, us))
-      return VALUE_DRAW;
+      return VALUE_DRAW;*/
 
   Value result = VALUE_KNOWN_WIN + PawnValueEg + Value(rank_of(strongPawn));
 
@@ -738,8 +738,8 @@ ScaleFactor Endgame<KPKP>::operator()(const Position& pos) const {
   // rook pawn, it's too dangerous to assume that it's at least a draw.
   if (rank_of(strongPawn) >= RANK_5 && file_of(strongPawn) != FILE_A)
       return SCALE_FACTOR_NONE;
-
+  return SCALE_FACTOR_DRAW;
   // Probe the KPK bitbase with the weakest side's pawn removed. If it's a draw,
   // it's probably at least a draw even with the pawn.
-  return Bitbases::probe(strongKing, strongPawn, weakKing, us) ? SCALE_FACTOR_NONE : SCALE_FACTOR_DRAW;
+  // return Bitbases::probe(strongKing, strongPawn, weakKing, us) ? SCALE_FACTOR_NONE : SCALE_FACTOR_DRAW;
 }
