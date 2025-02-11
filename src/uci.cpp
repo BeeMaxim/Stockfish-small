@@ -116,18 +116,19 @@ namespace {
     limits.startTime = now(); // As early as possible!
 
     while (is >> token)
+    /*
         if (token == "searchmoves") // Needs to be the last command on the line
             while (is >> token)
-                limits.searchmoves.push_back(UCI::to_move(pos, token));
+                limits.searchmoves.push_back(UCI::to_move(pos, token));*/
 
-        else if (token == "wtime")     is >> limits.time[WHITE];
+        if (token == "wtime")     is >> limits.time[WHITE];
         else if (token == "btime")     is >> limits.time[BLACK];
-        else if (token == "winc")      is >> limits.inc[WHITE];
-        else if (token == "binc")      is >> limits.inc[BLACK];
-        else if (token == "movestogo") is >> limits.movestogo;
+       // else if (token == "winc")      is >> limits.inc[WHITE];
+        //else if (token == "binc")      is >> limits.inc[BLACK];
+       //// else if (token == "movestogo") is >> limits.movestogo;
         else if (token == "depth")     is >> limits.depth;
         // else if (token == "nodes")     is >> limits.nodes;
-        else if (token == "movetime")  is >> limits.movetime;
+       // else if (token == "movetime")  is >> limits.movetime;
         // else if (token == "mate")      is >> limits.mate;
         // else if (token == "perft")     is >> limits.perft;
         // else if (token == "infinite")  limits.infinite = 1;
@@ -185,6 +186,7 @@ namespace {
 
   // The win rate model returns the probability (per mille) of winning given an eval
   // and a game-ply. The model fits rather accurately the LTC fishtest statistics.
+  /*
   int win_rate_model(Value v, int ply) {
 
      // The model captures only up to 240 plies, so limit input (and rescale)
@@ -203,7 +205,7 @@ namespace {
 
      // Return win rate in per mille (rounded to nearest)
      return int(0.5 + 1000 / (1 + std::exp((a - x) / b)));
-  }
+  }*/
 
 } // namespace
 
@@ -294,7 +296,7 @@ string UCI::value(Value v) {
 
 /// UCI::wdl() report WDL statistics given an evaluation and a game ply, based on
 /// data gathered for fishtest LTC games.
-
+/*
 string UCI::wdl(Value v, int ply) {
 
   stringstream ss;
@@ -305,7 +307,7 @@ string UCI::wdl(Value v, int ply) {
   ss << " wdl " << wdl_w << " " << wdl_d << " " << wdl_l;
 
   return ss.str();
-}
+}*/
 
 
 /// UCI::square() converts a Square to a string in algebraic notation (g1, a7, etc.)

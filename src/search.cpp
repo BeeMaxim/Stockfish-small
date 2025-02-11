@@ -91,7 +91,7 @@ namespace {
   Value value_draw(Thread* thisThread) {
     return VALUE_DRAW + Value(2 * (thisThread->nodes & 1) - 1);
   }
-
+/*
   // Skill structure is used to implement strength limit
   struct Skill {
     explicit Skill(int l) : level(l) {}
@@ -101,7 +101,7 @@ namespace {
 
     int level;
     Move best = MOVE_NONE;
-  };
+  };*/
 
   // Breadcrumbs are used to mark nodes as being searched by a given thread
   struct Breadcrumb {
@@ -337,13 +337,13 @@ void Thread::search() {
   // to CCRL Elo (goldfish 1.13 = 2000) and a fit through Ordo derived Elo
   // for match (TC 60+0.6) results spanning a wide range of k values.
   PRNG rng(now());
-  
+  /*
   double floatLevel = Options["UCI_LimitStrength"] ?
                       Utility::clamp(std::pow((Options["UCI_Elo"] - 1346.6) / 143.4, 1 / 0.806), 0.0, 20.0) :
                         double(Options["Skill Level"]);
   int intLevel = int(floatLevel) +
                  ((floatLevel - int(floatLevel)) * 1024 > rng.rand<unsigned>() % 1024  ? 1 : 0);
-  Skill skill(intLevel);
+  Skill skill(intLevel);*/
 
   // When playing with strength handicap enable MultiPV search that we will
   // use behind the scenes to retrieve a set of possible moves.
@@ -1770,7 +1770,7 @@ moves_loop: // When in check, search starts from here
 
   // When playing with strength handicap, choose best move among a set of RootMoves
   // using a statistical rule dependent on 'level'. Idea by Heinz van Saanen.
-
+/*
   Move Skill::pick_best(size_t multiPV) {
 
     const RootMoves& rootMoves = Threads.main()->rootMoves;
@@ -1799,7 +1799,7 @@ moves_loop: // When in check, search starts from here
     }
 
     return best;
-  }
+  }*/
 
 } // namespace
 
@@ -1871,25 +1871,25 @@ string UCI::pv(const Position& pos, Depth depth, Value alpha, Value beta) {
          << " seldepth " << rootMoves[i].selDepth
          << " multipv "  << i + 1
          << " score "    << UCI::value(v);
-
+/*
       if (Options["UCI_ShowWDL"])
-          ss << UCI::wdl(v, pos.game_ply());
+          ss << UCI::wdl(v, pos.game_ply());*/
 
       if (!tb && i == pvIdx)
           ss << (v >= beta ? " lowerbound" : v <= alpha ? " upperbound" : "");
 
       ss << " nodes "    << nodesSearched
          << " nps "      << nodesSearched * 1000 / elapsed;
-
+/*
       if (elapsed > 1000) // Earlier makes little sense
-          ss << " hashfull " << TT.hashfull();
+          ss << " hashfull " << TT.hashfull();*/
 
       ss << " tbhits "   << tbHits
          << " time "     << elapsed
          << " pv";
-
+/*
       for (Move m : rootMoves[i].pv)
-          ss << " " << UCI::move(m, pos.is_chess960());
+          ss << " " << UCI::move(m, pos.is_chess960());*/
   }
 
   return ss.str(); return "";
